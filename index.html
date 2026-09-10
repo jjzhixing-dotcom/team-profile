@@ -752,12 +752,12 @@
       <div class="stats-bar">
         <div class="stat-item breaklimit"><div class="stat-value">12<span class="stat-max">/10</span></div><div class="stat-label">枪法命中</div></div>
         <div class="stat-item breaklimit"><div class="stat-value">12<span class="stat-max">/10</span></div><div class="stat-label">走位意识</div></div>
-        <div class="stat-item breaklimit"><div class="stat-value">12<span class="stat-max">/10</span></div><div class="stat-label">大招运用</div></div>
-        <div class="stat-item breaklimit"><div class="stat-value">12<span class="stat-max">/10</span></div><div class="stat-label">团队配合</div></div>
+        <div class="stat-item highlight"><div class="stat-value">10<span class="stat-max">/10</span></div><div class="stat-label">大招运用</div></div>
+        <div class="stat-item highlight"><div class="stat-value">10<span class="stat-max">/10</span></div><div class="stat-label">团队配合</div></div>
         <div class="stat-item highlight"><div class="stat-value">10<span class="stat-max">/10</span></div><div class="stat-label">英雄池</div></div>
         <div class="stat-item highlight"><div class="stat-value">10<span class="stat-max">/10</span></div><div class="stat-label">心态抗压</div></div>
       </div>
-      <div class="p-quote">「 全能无短板，爆表即正义 」</div>
+      <div class="p-quote">「 六边形装不下，都溢出来了 」</div>
     </div>
   </div>
   <div class="videos-section gold">
@@ -943,18 +943,30 @@
       tooltip:{trigger:'item',triggerOn:'click',renderMode:'richText',confine:true,
         backgroundColor:'rgba(20,15,5,0.92)',borderColor:'rgba(255,215,0,0.4)',borderWidth:1,
         textStyle:{color:'#fff',fontSize:12,lineHeight:18},padding:[10,14]},
-      radar:{indicator:[
-        {name:'枪法命中',max:12},{name:'走位意识',max:12},{name:'大招运用',max:12},
-        {name:'团队配合',max:12},{name:'英雄池',max:12},{name:'心态抗压',max:12}],
-        center:['44%','52%'],radius:'66%',startAngle:90,
-        axisName:{color:'rgba(255,255,255,0.85)',fontSize:13,fontWeight:600,
-          textShadow:'0 0 8px rgba(0,0,0,0.8),0 0 16px rgba(0,0,0,0.5)'},
-        splitNumber:6,
-        splitArea:{areaStyle:{color:['rgba(255,215,0,0.02)','rgba(255,215,0,0.05)','rgba(255,215,0,0.02)','rgba(255,215,0,0.05)','rgba(255,215,0,0.02)','rgba(255,215,0,0.05)']}},
-        axisLine:{lineStyle:{color:'rgba(255,215,0,0.25)'}},
-        splitLine:{lineStyle:{color:'rgba(255,215,0,0.2)'}}},
-      series:[{type:'radar',symbol:'circle',symbolSize:9,data:[{
-        value:[12,12,12,12,10,10],name:'小歪',
+      radar:[
+        {
+          indicator:[
+            {name:'枪法命中',max:10},{name:'走位意识',max:10},{name:'大招运用',max:10},
+            {name:'团队配合',max:10},{name:'英雄池',max:10},{name:'心态抗压',max:10}],
+          center:['44%','52%'],radius:'66%',startAngle:90,
+          axisName:{color:'rgba(255,255,255,0.85)',fontSize:13,fontWeight:600,
+            textShadow:'0 0 8px rgba(0,0,0,0.8),0 0 16px rgba(0,0,0,0.5)'},
+          splitNumber:5,
+          splitArea:{areaStyle:{color:['rgba(255,215,0,0.02)','rgba(255,215,0,0.05)','rgba(255,215,0,0.02)','rgba(255,215,0,0.05)','rgba(255,215,0,0.02)']}},
+          axisLine:{lineStyle:{color:'rgba(255,215,0,0.25)'}},
+          splitLine:{lineStyle:{color:'rgba(255,215,0,0.2)'}}
+        },
+        {
+          indicator:[
+            {name:'枪法命中',max:12},{name:'走位意识',max:12},{name:'大招运用',max:12},
+            {name:'团队配合',max:12},{name:'英雄池',max:12},{name:'心态抗压',max:12}],
+          center:['44%','52%'],radius:'79.2%',startAngle:90,
+          axisName:{show:false},splitNumber:0,
+          axisLine:{show:false},splitLine:{show:false},splitArea:{show:false}
+        }
+      ],
+      series:[{type:'radar',radarIndex:1,symbol:'circle',symbolSize:9,data:[{
+        value:[12,12,10,10,10,10],name:'小歪',
         areaStyle:{color:new echarts.graphic.RadialGradient(0.5,0.5,1,[
           {offset:0,color:'rgba(255,215,0,0.55)'},{offset:1,color:'rgba(255,140,0,0.3)'}])},
         lineStyle:{color:'#FFD700',width:3,shadowColor:'rgba(255,215,0,0.6)',shadowBlur:15},
