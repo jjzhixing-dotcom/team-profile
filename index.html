@@ -684,6 +684,16 @@
   .poster.green .stat-item.low { background: rgba(255,23,68,0.06); border-color: rgba(255,23,68,0.25); }
   .poster.green .stat-item.highlight .stat-value { color: #BBF7D0; }
   .poster.green .stat-item.low .stat-value { color: #FF5252; }
+  .videos-section.green .v-title { background: none; -webkit-text-fill-color: #22C55E; color: #22C55E; }
+  .videos-section.green .v-line { background: linear-gradient(90deg, rgba(34,197,94,0.4), transparent); }
+  .videos-section.green .video-card:hover {
+    transform: translateY(-4px); border-color: rgba(34,197,94,0.3); box-shadow: 0 12px 30px rgba(34,197,94,0.12);
+  }
+  .videos-section.green .video-thumb { background: linear-gradient(135deg,#0a1a10,#0f2418,#142e1f); }
+  .videos-section.green .video-thumb::before { background: radial-gradient(circle at 50% 50%, rgba(34,197,94,0.1), transparent 60%); }
+  .videos-section.green .play-btn { background: rgba(34,197,94,0.9); box-shadow: 0 0 20px rgba(34,197,94,0.4); }
+  .videos-section.green .video-card:hover .play-btn { background: #22C55E; }
+  .videos-section.green .v-tag { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: #4ADE80; }
 </style>
 </head>
 <body>
@@ -1176,6 +1186,15 @@
         <div class="stat-item"><div class="stat-value">6<span class="stat-max">/10</span></div><div class="stat-label">心态抗压</div></div>
       </div>
       <div class="p-quote">「 她的头发檀香味 」</div>
+  <div class="videos-section green">
+    <div class="v-header"><span class="v-title">经典名场面</span><span class="v-line"></span><span class="v-count">敬请期待</span></div>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-thumb"><div class="play-btn"></div></div>
+        <div class="video-info"><div class="video-title">源氏·精彩集锦</div><div class="video-meta">暂无视频，待补充</div><span class="v-tag">待补充</span></div>
+      </div>
+    </div>
+  </div>
     </div>
   </div>
 </section>
