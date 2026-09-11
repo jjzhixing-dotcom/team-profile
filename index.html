@@ -1148,18 +1148,22 @@
     box.innerHTML=html;
   }
   function compareOption(){
-    var a=memberById(cmpA), b=memberById(cmpB), ind=[];
-    for(var i=0;i<DIMS.length;i++){ ind.push({name:DIMS[i], max:12}); }
+    var a=memberById(cmpA), b=memberById(cmpB), ind10=[], ind12=[];
+    for(var i=0;i<DIMS.length;i++){ ind10.push({name:DIMS[i], max:10}); ind12.push({name:DIMS[i], max:12}); }
     return {
       backgroundColor:'transparent',
       tooltip:{trigger:'item', triggerOn:'click', renderMode:'richText', confine:true, textStyle:{fontSize:12}},
       legend:{top:2, itemWidth:16, itemHeight:9, textStyle:{color:'#cfdbee', fontSize:13}, data:[a.name, b.name]},
-      radar:{indicator:ind, center:['50%','55%'], radius:'63%', splitNumber:6,
-        axisName:{color:'rgba(255,255,255,0.85)', fontSize:12.5, fontWeight:600},
-        splitLine:{lineStyle:{color:'rgba(255,255,255,0.12)'}},
-        axisLine:{lineStyle:{color:'rgba(255,255,255,0.15)'}},
-        splitArea:{areaStyle:{color:['rgba(255,255,255,0.015)','rgba(255,255,255,0.04)']}}},
-      series:[{type:'radar', symbolSize:5, data:[
+      radar:[
+        {indicator:ind10, center:['50%','55%'], radius:'63%', splitNumber:5,
+          axisName:{color:'rgba(255,255,255,0.85)', fontSize:12.5, fontWeight:600},
+          splitLine:{lineStyle:{color:'rgba(255,255,255,0.12)'}},
+          axisLine:{lineStyle:{color:'rgba(255,255,255,0.15)'}},
+          splitArea:{areaStyle:{color:['rgba(255,255,255,0.015)','rgba(255,255,255,0.04)']}}},
+        {indicator:ind12, center:['50%','55%'], radius:'75.6%', splitNumber:5,
+          axisName:{show:false}, splitLine:{show:false}, axisLine:{show:false}, splitArea:{show:false}}
+      ],
+      series:[{type:'radar', radarIndex:1, symbolSize:5, data:[
         {value:a.vals, name:a.name, lineStyle:{color:a.color, width:2.5}, itemStyle:{color:a.color}, areaStyle:{color:a.color, opacity:0.22}},
         {value:b.vals, name:b.name, lineStyle:{color:b.color, width:2.5}, itemStyle:{color:b.color}, areaStyle:{color:b.color, opacity:0.22}}
       ]}]
@@ -1225,7 +1229,7 @@
   function renderRankBoard(){
     var list=rankList(rankCur), max=(rankCur===6?72:12), html='';
     var top=list[0], flop=list[list.length-1];
-    html+='<div class="rank-quip"><div class="q top">称王 · '+top.m.name+'（'+top.score+' 分）：'+QUIP_TOP[rankCur]+'</div><div class="q flop">副班长 · '+flop.m.name+'（'+flop.score+' 分）：'+QUIP_FLOP[rankCur]+'</div></div>';
+    html+='<div class="rank-quip"><div class="q top">称王 · '+top.m.name+'（'+top.score+' 分）：'+QUIP_TOP[rankCur]+'</div><div class="q flop">垫底 · '+flop.m.name+'（'+flop.score+' 分）：'+QUIP_FLOP[rankCur]+'</div></div>';
     for(var i=0;i<list.length;i++){
       var it=list[i], w=Math.round(it.score/max*100);
       var bl=(rankCur!==6 && it.score>10)?'<span class="bl">爆表</span>':'';
@@ -1249,14 +1253,18 @@
   var guessCur=null, guessLast=null, guessTotal=0, guessRight=0, guessStreak=0, guessAnswered=false, guessInited=false;
   var GUESS_COLOR='#8FB3D9';
   function guessRadarOption(m){
-    var ind=[]; for(var i=0;i<DIMS.length;i++){ ind.push({name:DIMS[i], max:12}); }
+    var ind10=[], ind12=[]; for(var i=0;i<DIMS.length;i++){ ind10.push({name:DIMS[i], max:10}); ind12.push({name:DIMS[i], max:12}); }
     return { backgroundColor:'transparent',
-      radar:{indicator:ind, center:['50%','54%'], radius:'65%', splitNumber:6,
-        axisName:{color:'rgba(255,255,255,0.85)', fontSize:13, fontWeight:600},
-        splitLine:{lineStyle:{color:'rgba(255,255,255,0.12)'}},
-        axisLine:{lineStyle:{color:'rgba(255,255,255,0.15)'}},
-        splitArea:{areaStyle:{color:['rgba(255,255,255,0.015)','rgba(255,255,255,0.04)']}}},
-      series:[{type:'radar', symbolSize:6, data:[{value:m.vals, lineStyle:{color:GUESS_COLOR, width:2.5}, itemStyle:{color:GUESS_COLOR}, areaStyle:{color:GUESS_COLOR, opacity:0.25}}]}] };
+      radar:[
+        {indicator:ind10, center:['50%','54%'], radius:'65%', splitNumber:5,
+          axisName:{color:'rgba(255,255,255,0.85)', fontSize:13, fontWeight:600},
+          splitLine:{lineStyle:{color:'rgba(255,255,255,0.12)'}},
+          axisLine:{lineStyle:{color:'rgba(255,255,255,0.15)'}},
+          splitArea:{areaStyle:{color:['rgba(255,255,255,0.015)','rgba(255,255,255,0.04)']}}},
+        {indicator:ind12, center:['50%','54%'], radius:'78%', splitNumber:5,
+          axisName:{show:false}, splitLine:{show:false}, axisLine:{show:false}, splitArea:{show:false}}
+      ],
+      series:[{type:'radar', radarIndex:1, symbolSize:6, data:[{value:m.vals, lineStyle:{color:GUESS_COLOR, width:2.5}, itemStyle:{color:GUESS_COLOR}, areaStyle:{color:GUESS_COLOR, opacity:0.25}}]}] };
   }
   function newGuess(){
     var pick, guard=0;
