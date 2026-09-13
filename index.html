@@ -1640,14 +1640,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <!-- ===== 数据对战 ===== -->
-  <section id="page-battle" class="page">
-    <div class="container">
-<h1>数据对战</h1>
-  <p class="subtitle">DATA BATTLE v2 · SVG英雄 · 手动操作 · 差异化大招</p>
+  <section id="page-battle" class="page tool-page">
+    <div class="back-btn" data-goto="home">返回队友列表</div>
+    <div class="tool-wrap">
+      <h2 class="tool-title">数据对战</h2>
+      <p class="tool-sub">DATA BATTLE · 头像立绘 · 手动操作 · 差异化大招</p>
 
   <!-- 选择界面 -->
   <div class="select-screen" id="selectScreen">
-    <div class="back-btn" data-goto="home">返回队友列表</div>
     <div class="mode-row">
       <button class="mode-btn active" data-mode="auto">全自动观战</button>
       <button class="mode-btn" data-mode="manual">手动操作（控制蓝方）</button>
@@ -1730,7 +1730,6 @@
       <div class="stats-compare" id="statsCompare"></div>
       <button class="again-btn" onclick="resetBattle()">重新选人对战</button>
     </div>
-  </div>
     </div>
   </section>
 <script>
