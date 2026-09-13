@@ -1727,7 +1727,7 @@
       <div class="winner-sub" id="winnerSub"></div>
       <div class="mvp-comment" id="mvpComment"></div>
       <div class="stats-compare" id="statsCompare"></div>
-      <button class="again-btn" onclick="location.reload()">重新选人对战</button>
+      <button class="again-btn" onclick="resetBattle()">重新选人对战</button>
     </div>
   </div>
     </div>
@@ -2916,13 +2916,59 @@
     paused = !paused;
     this.textContent = paused ? '继续' : '暂停';
   };
-  document.getElementById('skipBtn').onclick = function(){
-    // 快速模拟到结束
+  document.getElementById('skipBtn').onclick = skipToEnd;
+
+  // 同步模拟到结束（跳过动画）
+  function skipToEnd() {
     if (!battleRunning) return;
-    speed = 4;
+    waitingForInput = false;
+    document.getElementById('actionPanel').classList.remove('show');
+    var guard = 0;
+    while (battleRunning && guard < 50) {
+      guard++;
+      if (hp1<=0||hp2<=0) { endBattle(); break; }
+      if (turn >= 20) { addLog('<span class="result">⏰ 达到20回合上限！</span>'); endBattle(); break; }
+      turn++;
+      document.getElementById('turnNum').textContent = turn;
+      if (ultCd1>0) ultCd1--;
+      if (ultCd2>0) ultCd2--;
+      if (debuff1>0) debuff1--;
+      if (debuff2>0) debuff2--;
+      defBuff1=defBuff2=false;
+      stun1=stun2=false;
+      checkBerserk(1); checkBerserk(2);
+      var a1 = aiDecide(1);
+      var a2 = aiDecide(2);
+      doAction(1, a1);
+      if (hp1<=0||hp2<=0) { endBattle(); break; }
+      doAction(2, a2);
+      if (hp1<=0||hp2<=0) { endBattle(); break; }
+    }
+  }
+
+  // 回到选人界面
+  function resetBattle() {
+    battleRunning = false;
+    waitingForInput = false;
+    p1 = null; p2 = null;
+    document.getElementById('battleScreen').classList.remove('show');
+    document.getElementById('resultPanel').classList.remove('show');
+    document.getElementById('selectScreen').classList.remove('hidden');
+    document.getElementById('actionPanel').classList.remove('show');
+    // 清除卡片选中状态
+    document.querySelectorAll('#page-battle .fighter-chip').forEach(function(c){
+      c.classList.remove('selected','selected-p1','selected-p2');
+    });
+    // 重置速度
+    speed = 1;
     document.querySelectorAll('.speed-btn').forEach(function(b){b.classList.remove('active');});
-    document.querySelector('.speed-btn[data-speed="4"]').classList.add('active');
-  };
+    var sb = document.querySelector('.speed-btn[data-speed="1"]');
+    if (sb) sb.classList.add('active');
+    var pb = document.getElementById('pauseBtn');
+    if (pb) pb.textContent = '暂停';
+    paused = false;
+  }
+  window.resetBattle = resetBattle;
   document.getElementById('btnAtk').onclick = function(){ playerAction('atk'); };
   document.getElementById('btnUlt').onclick = function(){ playerAction('ult'); };
   document.getElementById('btnDef').onclick = function(){ playerAction('def'); };
