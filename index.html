@@ -1017,6 +1017,245 @@
     font-weight:600; letter-spacing:2px; transition:all 0.15s;
   }
   .again-btn:hover { background:rgba(255,255,255,0.12); color:#fff; }
+
+/* ===== 今日运势模块 ===== */
+/* ===== 星座选择 ===== */
+.fortune-input {
+  display: flex; gap: 14px; justify-content: center; align-items: center;
+  margin-bottom: 30px; flex-wrap: wrap;
+}
+.fortune-input select {
+  background: rgba(15,25,45,0.9); color: #cde; border: 1px solid rgba(100,140,200,0.3);
+  padding: 12px 18px; border-radius: 8px; font-size: 14px; min-width: 240px;
+  cursor: pointer; outline: none;
+}
+.fortune-input select:focus { border-color: #b57edc; box-shadow: 0 0 15px rgba(181,126,220,0.25); }
+.fortune-start {
+  background: linear-gradient(135deg, #7c3aed, #b57edc);
+  color: #fff; border: none; padding: 12px 28px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 2px;
+  transition: transform .2s, box-shadow .2s;
+}
+.fortune-start:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(124,58,237,0.4); }
+.fortune-start:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+/* ===== 洗牌阶段 ===== */
+.shuffle-stage {
+  display: none; position: relative; height: 280px; margin: 20px 0;
+}
+.shuffle-stage.show { display: block; }
+.shuffle-deck {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 90px; height: 130px;
+}
+.shuffle-card {
+  position: absolute; width: 90px; height: 130px; border-radius: 8px;
+  background: linear-gradient(145deg, #2d1b4e, #1a0f30);
+  border: 1px solid rgba(181,126,220,0.4);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.shuffle-hint {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  color: rgba(200,170,255,0.6); font-size: 13px; letter-spacing: 3px;
+}
+@keyframes shuffleFly1 {
+  0% { transform: translate(0,0) rotate(0); }
+  25% { transform: translate(-180px,-30px) rotate(-25deg); }
+  50% { transform: translate(-100px,10px) rotate(-10deg); }
+  75% { transform: translate(-160px,-20px) rotate(-20deg); }
+  100% { transform: translate(0,0) rotate(0); }
+}
+@keyframes shuffleFly2 {
+  0% { transform: translate(0,0) rotate(0); }
+  25% { transform: translate(180px,-30px) rotate(25deg); }
+  50% { transform: translate(100px,10px) rotate(10deg); }
+  75% { transform: translate(160px,-20px) rotate(20deg); }
+  100% { transform: translate(0,0) rotate(0); }
+}
+.shuffle-card.fly1 { animation: shuffleFly1 0.7s ease-in-out 3; }
+.shuffle-card.fly2 { animation: shuffleFly2 0.7s ease-in-out 3; }
+
+/* ===== 运势结果 ===== */
+.fortune-result { display: none; }
+.fortune-result.show { display: block; animation: fadeUp .6s ease; }
+@keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+.fortune-level {
+  text-align: center; font-size: 42px; font-weight: 900; letter-spacing: 8px;
+  margin-bottom: 6px;
+}
+.fortune-level.daji { color: #FFD700; text-shadow: 0 0 30px rgba(255,215,0,0.5); }
+.fortune-level.zhongji { color: #FFA500; text-shadow: 0 0 25px rgba(255,165,0,0.4); }
+.fortune-level.xiaoji { color: #4ADE80; text-shadow: 0 0 20px rgba(74,222,128,0.4); }
+.fortune-level.ping { color: #94a3b8; }
+.fortune-level.xiaoxiong { color: #f87171; text-shadow: 0 0 20px rgba(248,113,113,0.4); }
+
+.fortune-winrate {
+  text-align: center; font-size: 15px; color: rgba(200,220,255,0.7); margin-bottom: 24px;
+}
+.fortune-winrate b { color: #b57edc; font-size: 20px; }
+
+.fortune-yiji {
+  display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap;
+}
+.yiji-box {
+  flex: 1; min-width: 280px; max-width: 400px;
+  background: rgba(20,35,60,0.6); border-radius: 10px; padding: 16px 20px;
+  border: 1px solid rgba(100,140,200,0.15);
+}
+.yiji-box.yi { border-left: 3px solid #4ADE80; }
+.yiji-box.ji { border-left: 3px solid #f87171; }
+.yiji-title { font-weight: 700; margin-bottom: 8px; font-size: 15px; letter-spacing: 2px; }
+.yiji-box.yi .yiji-title { color: #4ADE80; }
+.yiji-box.ji .yiji-title { color: #f87171; }
+.yiji-item { font-size: 13.5px; color: rgba(210,225,245,0.85); padding: 3px 0; }
+
+.fortune-lucky {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.lucky-chip {
+  background: rgba(40,25,70,0.6); border: 1px solid rgba(181,126,220,0.3);
+  border-radius: 20px; padding: 8px 18px; font-size: 13px;
+  display: flex; align-items: center; gap: 8px;
+}
+.lucky-chip .lc-label { color: rgba(180,160,220,0.7); }
+.lucky-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+
+.fortune-role {
+  text-align: center; font-size: 14px; color: rgba(200,220,255,0.75); margin-bottom: 12px;
+}
+.fortune-role b { color: #22d3ee; }
+.fortune-summary {
+  text-align: center; font-size: 14px; color: rgba(220,210,255,0.9);
+  background: rgba(50,30,80,0.35); border-radius: 10px; padding: 14px 24px;
+  max-width: 600px; margin: 0 auto 30px; line-height: 1.7;
+}
+
+/* ===== 卡牌扇形 ===== */
+.cards-stage { display: none; padding-top: 40px; }
+.cards-stage.show { display: block; animation: fadeUp .6s ease; }
+.cards-hint {
+  text-align: center; color: rgba(200,170,255,0.6); font-size: 13px;
+  letter-spacing: 3px; margin-bottom: 20px;
+}
+.fan-container {
+  position: relative; margin: 0 auto; max-width: 900px;
+}
+.fan-container.fan-mode { height: 350px; }
+.fan-container.grid-mode {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+}
+.fan-card {
+  width: 80px; height: 116px; cursor: pointer;
+  transition: filter .25s ease, margin-top .25s ease;
+}
+.fan-mode .fan-card { position: absolute; }
+.fan-mode .fan-card:hover { filter: brightness(1.25); margin-top: -12px; z-index: 50 !important; }
+.fan-card.disabled { pointer-events: none; opacity: 0.5; filter: grayscale(0.7); }
+.grid-mode .fan-card { position: static; width: 100%; margin: 0 auto; }
+.grid-mode .fan-card .card-3d { height: 120px; }
+.grid-mode .fan-card:hover { filter: brightness(1.2); }
+
+.card-3d {
+  width: 100%; height: 100%; position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
+}
+.fan-card.flipped .card-3d { transform: rotateY(180deg); }
+.card-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: 8px; overflow: hidden;
+}
+.card-back-face {
+  background: linear-gradient(145deg, #2d1b4e, #160a28);
+  border: 1.5px solid rgba(181,126,220,0.5);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+}
+.card-back-pattern {
+  width: 62px; height: 96px; border: 1px solid rgba(181,126,220,0.35);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.card-back-pattern::before {
+  content: '✦'; font-size: 22px; color: rgba(200,160,255,0.55);
+}
+.card-back-pattern::after {
+  content: ''; position: absolute; width: 40px; height: 40px;
+  border: 1px dashed rgba(181,126,220,0.25); border-radius: 50%;
+}
+.card-front-face {
+  transform: rotateY(180deg);
+  background: linear-gradient(160deg, #1a2540, #0d1525);
+  border: 1.5px solid rgba(150,180,230,0.4);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 6px;
+}
+.card-front-face img {
+  width: 60px; height: 60px; border-radius: 50%; object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.card-front-name { font-size: 11px; margin-top: 6px; text-align: center; font-weight: 700; }
+
+/* 特殊牌正面 */
+.special-front {
+  background: linear-gradient(160deg, #3d1a5e, #1a0a30);
+  border: 1.5px solid rgba(255,215,0,0.5);
+}
+.special-front .special-icon { font-size: 34px; }
+.special-front .special-label { font-size: 11px; color: #FFD700; margin-top: 4px; letter-spacing: 2px; }
+
+/* ===== 翻牌结果 ===== */
+.card-result { display: none; margin-top: 30px; }
+.card-result.show { display: block; animation: fadeUp .6s ease; }
+.result-card {
+  background: rgba(15,25,45,0.7); border: 1px solid rgba(100,140,200,0.2);
+  border-radius: 14px; padding: 28px; max-width: 700px; margin: 0 auto;
+}
+.result-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
+.result-avatar {
+  width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+  border: 3px solid; margin-bottom: 10px;
+}
+.result-name { font-size: 24px; font-weight: 900; letter-spacing: 3px; }
+.result-radar { width: 100%; height: 340px; }
+.result-advice {
+  background: rgba(40,25,70,0.4); border-radius: 10px; padding: 14px 20px;
+  font-size: 14px; line-height: 1.8; color: rgba(220,215,245,0.9);
+  margin-top: 10px; text-align: center;
+}
+.result-actions { display: flex; gap: 14px; justify-content: center; margin-top: 20px; }
+.redraw-btn {
+  background: linear-gradient(135deg, #7c3aed, #b57edc);
+  color: #fff; border: none; padding: 11px 26px; border-radius: 8px;
+  font-size: 14px; font-weight: 700; cursor: pointer; letter-spacing: 2px;
+  transition: transform .2s;
+}
+.redraw-btn:hover { transform: translateY(-2px); }
+
+/* 特殊牌结果 */
+.special-result .result-avatar { border-color: #FFD700; box-shadow: 0 0 25px rgba(255,215,0,0.4); }
+.special-radar-placeholder {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 60px; color: rgba(255,215,0,0.4);
+}
+
+/* ===== 移动端 ===== */
+@media (max-width: 700px) {
+  .cards-stage { padding-top: 10px; }
+  .fortune-level { font-size: 30px; letter-spacing: 5px; }
+  .fortune-input select { min-width: 200px; width: 100%; max-width: 300px; }
+  .fortune-input { flex-direction: column; }
+  .fortune-start { width: 100%; max-width: 300px; }
+  .yiji-box { min-width: 100%; }
+  .fortune-lucky { gap: 10px; }
+  .lucky-chip { padding: 7px 13px; font-size: 12px; }
+  .result-card { padding: 18px 14px; }
+  .result-radar { height: 300px; }
+}
 </style>
 </head>
 <body>
@@ -1060,6 +1299,10 @@
       <button class="tool-btn" data-goto="battle">
         <svg viewBox="0 0 24 24"><path d="M6 9l6-6 6 6M12 3v12M4 21h16"></path></svg>
         数据对战
+      </button>
+      <button class="tool-btn" data-goto="fortune">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"></circle><path d="M9 14.5 8 20M15 14.5 16 20M8 20h8"></path></svg>
+        今日运势
       </button>
     </div>
     <div class="card-grid">
@@ -1637,6 +1880,44 @@
     </div>
   </div>
 </section>
+
+  <!-- ===== 视图：今日运势 ===== -->
+  <section id="page-fortune" class="page tool-page">
+    <div class="back-btn" data-goto="home">返回队友列表</div>
+    <div class="tool-wrap">
+      <h2 class="tool-title">今日运势</h2>
+      <p class="tool-sub">DAILY FORTUNE · 星座占卜 · 翻牌抽队友</p>
+<!-- 星座选择 -->
+    <div class="fortune-input">
+      <select id="zodiacSelect">
+        <option value="">请选择你的星座</option>
+      </select>
+      <button class="fortune-start" id="fortuneStart" disabled>开始占卜</button>
+    </div>
+
+    <!-- 洗牌 -->
+    <div class="shuffle-stage" id="shuffleStage">
+      <div class="shuffle-deck">
+        <div class="shuffle-card"></div>
+        <div class="shuffle-card fly1"></div>
+        <div class="shuffle-card fly2"></div>
+      </div>
+      <div class="shuffle-hint">正在洗牌，窥探天机...</div>
+    </div>
+
+    <!-- 运势结果 -->
+    <div class="fortune-result" id="fortuneResult"></div>
+
+    <!-- 卡牌扇形 -->
+    <div class="cards-stage" id="cardsStage">
+      <div class="cards-hint">凭直觉选一张牌</div>
+      <div class="fan-container" id="fanContainer"></div>
+    </div>
+
+    <!-- 翻牌结果 -->
+    <div class="card-result" id="cardResult"></div>
+    </div>
+  </section>
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <!-- ===== 数据对战 ===== -->
@@ -2986,6 +3267,439 @@
     pwInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') pwBtn.click(); });
     setTimeout(function(){ pwInput.focus(); }, 300);
   }
+
+(function(){
+/* ===== 运势模块数据 ===== */
+/* 12星座 */
+var ZODIACS = [
+  {id:'aries', name:'白羊座', dates:'3.21-4.19', element:'fire'},
+  {id:'taurus', name:'金牛座', dates:'4.20-5.20', element:'earth'},
+  {id:'gemini', name:'双子座', dates:'5.21-6.21', element:'air'},
+  {id:'cancer', name:'巨蟹座', dates:'6.22-7.22', element:'water'},
+  {id:'leo', name:'狮子座', dates:'7.23-8.22', element:'fire'},
+  {id:'virgo', name:'处女座', dates:'8.23-9.22', element:'earth'},
+  {id:'libra', name:'天秤座', dates:'9.23-10.23', element:'air'},
+  {id:'scorpio', name:'天蝎座', dates:'10.24-11.22', element:'water'},
+  {id:'sagittarius', name:'射手座', dates:'11.23-12.21', element:'fire'},
+  {id:'capricorn', name:'摩羯座', dates:'12.22-1.19', element:'earth'},
+  {id:'aquarius', name:'水瓶座', dates:'1.20-2.18', element:'air'},
+  {id:'pisces', name:'双鱼座', dates:'2.19-3.20', element:'water'}
+];
+
+/* 元素 → 偏好队友id（权重更高） */
+var ELEMENT_PREF = {
+  fire:  ['lanlan','pengoulong','xiaowai'],
+  earth: ['bld','set','laoyan'],
+  air:   ['xiaowai','lizi','set'],
+  water: ['mumu','dianshen','hujiao']
+};
+var ELEMENT_ROLE = { fire:'输出', earth:'坦克', air:'自由人/输出', water:'辅助' };
+
+/* ===== 文案库 ===== */
+var YI_POOL = [
+  '打快速放松心态','抱大腿稳健上分','开麦和队友多交流','主动补位选辅助',
+  '练枪热身再排位','和好友组队开车','见好就收，赢两把就溜','玩自己最熟练的英雄',
+  '开局先报阵容','跟着大部队走','给队友让资源','打完复盘看一眼'
+];
+var JI_POOL = [
+  '单排硬刚排位','连跪了还不信邪','嘴硬不认错','深夜脑子不清醒时上分',
+  '强行抢输出carry','不看阵容乱选英雄','喷队友搞心态','玩没练过的英雄',
+  '大招捏着不用','一个人绕后脱节','把麦开着吵队友','优势局浪到翻盘'
+];
+var SUMMARY_POOL = {
+  daji: [
+    '天时地利人和，今天的服务器都在帮你，大胆冲。',
+    '状态在线手感火热，不趁着今天上分还等什么。',
+    '命里带赢的一天，队友靠谱对手拉胯，放心玩。'
+  ],
+  zhongji: [
+    '整体顺风顺水，只要不浪，赢面还是很大的。',
+    '中上之运，正常发挥就能拿下，别自己搞自己。',
+    '今天适合稳扎稳打，跟着节奏走，赢多输少。'
+  ],
+  xiaoji: [
+    '小吉，能赢但赢得不轻松，做好打硬仗的准备。',
+    '运势尚可，关键局需要你站出来，别隐身。',
+    '赢面略大，但过程可能有点波折，心态别炸。'
+  ],
+  ping: [
+    '运势平平，五五开的一天，赢不赢全看临场发挥。',
+    '无功无过，服务器没针对你也没帮你，靠自己吧。',
+    '平淡的一天，建议打快速娱乐，排位别太较真。'
+  ],
+  xiaoxiong: [
+    '今日小凶，建议把麦关掉，少说话多保心态。',
+    '运势低迷排到的队友可能不太靠谱，做好心理准备。',
+    '小凶之日，强行排位容易连跪，要不今天先练练枪。'
+  ]
+};
+
+/* ===== 工具函数 ===== */
+function rand(n){ return Math.floor(Math.random()*n); }
+function pick(arr){ return arr[rand(arr.length)]; }
+function shuffleArr(arr){
+  var a = arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j = rand(i+1);
+    var t = a[i]; a[i]=a[j]; a[j]=t;
+  }
+  return a;
+}
+function getMember(id){
+  for(var i=0;i<MEMBERS.length;i++) if(MEMBERS[i].id===id) return MEMBERS[i];
+  return null;
+}
+
+/* ===== 运势生成 ===== */
+var currentZodiac = null;
+var currentFortune = null;
+
+function generateFortune(zodiac){
+  // 基础胜率：各元素微调 + 大随机
+  var base = { fire: 56, earth: 52, air: 54, water: 50 };
+  var winrate = base[zodiac.element] + (Math.random()*30 - 12);
+  winrate = Math.max(28, Math.min(88, Math.round(winrate)));
+
+  var level, levelName, levelCls;
+  if(winrate >= 75){ level='daji'; levelName='大吉'; levelCls='daji'; }
+  else if(winrate >= 63){ level='zhongji'; levelName='中吉'; levelCls='zhongji'; }
+  else if(winrate >= 53){ level='xiaoji'; levelName='小吉'; levelCls='xiaoji'; }
+  else if(winrate >= 44){ level='ping'; levelName='平'; levelCls='ping'; }
+  else { level='xiaoxiong'; levelName='小凶'; levelCls='xiaoxiong'; }
+
+  // 宜忌各3条
+  var yi = shuffleArr(YI_POOL).slice(0,3);
+  var ji = shuffleArr(JI_POOL).slice(0,3);
+
+  // 幸运物
+  var luckyMember = pick(MEMBERS);
+  var luckyNum = rand(10)+1;
+  var luckyColor = pick(MEMBERS).color;
+
+  return {
+    level: level, levelName: levelName, levelCls: levelCls,
+    winrate: winrate,
+    yi: yi, ji: ji,
+    luckyHero: luckyMember.name,
+    luckyColor: luckyColor,
+    luckyNum: luckyNum,
+    bestRole: ELEMENT_ROLE[zodiac.element],
+    summary: pick(SUMMARY_POOL[level])
+  };
+}
+
+/* ===== 渲染运势结果 ===== */
+function renderFortune(f){
+  var html = '';
+  html += '<div class="fortune-level '+f.levelCls+'">'+f.levelName+'</div>';
+  html += '<div class="fortune-winrate">今日预测胜率 <b>'+f.winrate+'%</b></div>';
+  html += '<div class="fortune-yiji">';
+  html += '<div class="yiji-box yi"><div class="yiji-title">宜</div>';
+  f.yi.forEach(function(s){ html += '<div class="yiji-item">· '+s+'</div>'; });
+  html += '</div>';
+  html += '<div class="yiji-box ji"><div class="yiji-title">忌</div>';
+  f.ji.forEach(function(s){ html += '<div class="yiji-item">· '+s+'</div>'; });
+  html += '</div></div>';
+  html += '<div class="fortune-lucky">';
+  html += '<div class="lucky-chip"><span class="lc-label">幸运英雄</span>'+f.luckyHero+'</div>';
+  html += '<div class="lucky-chip"><span class="lc-label">幸运颜色</span><span class="lucky-dot" style="background:'+f.luckyColor+'"></span></div>';
+  html += '<div class="lucky-chip"><span class="lc-label">幸运数字</span>'+f.luckyNum+'</div>';
+  html += '</div>';
+  html += '<div class="fortune-role">今日最佳位置：<b>'+f.bestRole+'</b></div>';
+  html += '<div class="fortune-summary">'+f.summary+'</div>';
+  var el = document.getElementById('fortuneResult');
+  el.innerHTML = html;
+  el.classList.add('show');
+}
+
+/* ===== 卡牌 ===== */
+var SPECIAL_ID = '__fool__';
+var drawn = false;
+var radarChart = null;
+
+/* 生成洗牌后的牌序：10队友+1特殊 */
+function buildDeck(){
+  var ids = MEMBERS.map(function(m){return m.id;});
+  ids.push(SPECIAL_ID);
+  return shuffleArr(ids);
+}
+
+function isMobile(){ return window.innerWidth <= 700; }
+
+function buildCardEl(cardId){
+  var card = document.createElement('div');
+  card.className = 'fan-card';
+  card.setAttribute('data-card', cardId);
+
+  var frontContent = '';
+  if(cardId === SPECIAL_ID){
+    frontContent = '<div class="card-face card-front-face special-front"><div class="special-icon">?</div><div class="special-label">愚者</div></div>';
+  } else {
+    var m = getMember(cardId);
+    var avatar = AVATAR_B64[cardId] || '';
+    frontContent = '<div class="card-face card-front-face" style="border-color:'+m.color+'"><img src="'+avatar+'"><div class="card-front-name" style="color:'+m.color+'">'+m.name+'</div></div>';
+  }
+  card.innerHTML =
+    '<div class="card-3d">' +
+      '<div class="card-face card-back-face"><div class="card-back-pattern"></div></div>' +
+      frontContent +
+    '</div>';
+  card.addEventListener('click', function(){ onCardClick(card, cardId); });
+  return card;
+}
+
+function renderFan(deck){
+  var container = document.getElementById('fanContainer');
+  container.innerHTML = '';
+
+  if(isMobile()){
+    // 网格模式
+    container.className = 'fan-container grid-mode';
+    deck.forEach(function(cardId){
+      container.appendChild(buildCardEl(cardId));
+    });
+    return;
+  }
+
+  // 扇形模式：精确计算每张牌在圆弧上的位置
+  container.className = 'fan-container fan-mode';
+  var W = container.clientWidth || 860;
+  var n = deck.length; // 11
+  var totalAngle = 120;
+  var step = totalAngle/(n-1);
+  var startAngle = -totalAngle/2;
+  var CARD_W = 80, CARD_H = 116;
+  var centerX = W/2;
+  var centerY = 330;   // 扇形圆心Y（在容器底部附近）
+  var radius = 235;    // 牌中心到圆心距离
+
+  deck.forEach(function(cardId, i){
+    var angle = startAngle + i*step;
+    var rad = angle * Math.PI/180;
+    var px = centerX + radius * Math.sin(rad) - CARD_W/2;
+    var py = centerY - radius * Math.cos(rad) - CARD_H/2;
+
+    var card = buildCardEl(cardId);
+    card.style.left = px+'px';
+    card.style.top = py+'px';
+    card.style.transform = 'rotate('+angle+'deg)';
+    card.style.zIndex = String(i);
+    container.appendChild(card);
+  });
+}
+
+function onCardClick(card, cardId){
+  if(drawn) return;
+  drawn = true;
+  card.classList.add('flipped');
+
+  // 其他牌禁用
+  var all = document.querySelectorAll('.fan-card');
+  all.forEach(function(c){ if(c!==card) c.classList.add('disabled'); });
+
+  // 等翻牌动画后显示结果
+  setTimeout(function(){
+    if(cardId === SPECIAL_ID) showSpecialResult();
+    else showMemberResult(getMember(cardId));
+  }, 850);
+}
+
+/* ===== 队友结果 ===== */
+function showMemberResult(m){
+  var el = document.getElementById('cardResult');
+  el.className = 'card-result show';
+  var avatar = AVATAR_B64[m.id] || '';
+  el.innerHTML =
+    '<div class="result-card">' +
+      '<div class="result-header">' +
+        '<img class="result-avatar" src="'+avatar+'" style="border-color:'+m.color+';box-shadow:0 0 25px '+m.color+'66">' +
+        '<div class="result-name" style="color:'+m.color+'">'+m.name+'</div>' +
+      '</div>' +
+      '<div class="result-radar" id="resultRadar"></div>' +
+      '<div class="result-advice" id="resultAdvice"></div>' +
+      '<div class="result-actions"><button class="redraw-btn" id="redrawBtn">再抽一次</button></div>' +
+    '</div>';
+
+  drawRadar(m);
+  document.getElementById('resultAdvice').innerHTML = buildAdvice(m);
+  document.getElementById('redrawBtn').addEventListener('click', redraw);
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* 雷达图：双radar爆表方案 */
+function drawRadar(m){
+  var dom = document.getElementById('resultRadar');
+  if(radarChart) radarChart.dispose();
+  radarChart = echarts.init(dom);
+
+  var indicator = DIMS.map(function(d){ return {name:d, max:10}; });
+  var indicatorData = DIMS.map(function(d){ return {name:d, max:12}; });
+
+  var option = {
+    backgroundColor: 'transparent',
+    tooltip: { trigger:'item', renderMode:'richText', confine:true,
+      textStyle:{fontSize:11}, padding:[6,8] },
+    radar: [
+      {
+        indicator: indicator,
+        center: ['50%','54%'], radius: '62%',
+        splitNumber: 5,
+        axisName: { color:'rgba(200,220,255,0.75)', fontSize:12 },
+        splitLine: { lineStyle:{ color:'rgba(100,140,200,0.25)' } },
+        splitArea: { areaStyle:{ color:['rgba(20,35,60,0.3)','rgba(15,25,45,0.3)'] } },
+        axisLine: { lineStyle:{ color:'rgba(100,140,200,0.25)' } }
+      },
+      {
+        indicator: indicatorData,
+        center: ['50%','54%'], radius: '74%',
+        splitNumber: 0,
+        axisName: { show:false },
+        splitLine: { show:false },
+        splitArea: { show:false },
+        axisLine: { show:false }
+      }
+    ],
+    series: [{
+      type:'radar', radarIndex:1,
+      data:[{
+        value: m.vals,
+        name: m.name,
+        areaStyle: { color: m.color+'40' },
+        lineStyle: { color:m.color, width:2 },
+        itemStyle: { color:m.color }
+      }]
+    }]
+  };
+  radarChart.setOption(option);
+}
+
+/* 组队建议：星座匹配度 */
+function buildAdvice(m){
+  var pref = ELEMENT_PREF[currentZodiac.element];
+  var matched = pref.indexOf(m.id) !== -1;
+  var advice = '';
+
+  if(matched){
+    advice = '星座命理显示你和 <b style="color:'+m.color+'">'+m.name+'</b> 气场相合，今天组队默契度拉满。';
+    // 根据队友特点补一句
+    var extras = {
+      lanlan:'他的毁天灭地负责开团，你跟上输出就行。',
+      pengoulong:'记得让他把麦开开，沟通到位乱杀。',
+      xiaowai:'全能大腿带你飞，你负责喊666即可。',
+      bld:'让他先分析阵容，理论克制安排得明明白白。',
+      set:'卓威600Hz的枪法兜底，这把稳了。',
+      laoyan:'他拔刀你跟上，龙刃出鞘必有人头。',
+      lizi:'灵活位交给她拉扯，你打自己的节奏。',
+      mumu:'有她奶着你，放心往前压。',
+      dianshen:'他的猎空负责骚扰后排，你正面施压。',
+      hujiao:'路霸勾一个秒一个，跟着他打减员。'
+    };
+    if(extras[m.id]) advice += extras[m.id];
+  } else {
+    advice = '命理显示你和 <b style="color:'+m.color+'">'+m.name+'</b> 风格略有冲突，磨合需要点耐心。';
+    var low = {
+      dianshen:'他英雄池偏浅，记得让他玩猎空别硬补位。',
+      hujiao:'他走位比较莽，你多帮他看一下侧翼。',
+      mumu:'她枪法一般，但保命能力强，主打一个陪伴。',
+      lizi:'她中规中矩，别指望她carry，稳住就行。'
+    };
+    if(low[m.id]) advice += low[m.id];
+    else advice += '不过只要沟通到位，照样能赢。';
+  }
+  return advice;
+}
+
+/* ===== 特殊牌（愚者）结果 ===== */
+function showSpecialResult(){
+  var el = document.getElementById('cardResult');
+  el.className = 'card-result show special-result';
+  el.innerHTML =
+    '<div class="result-card">' +
+      '<div class="result-header">' +
+        '<div class="result-avatar" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#3d1a5e,#1a0a30);font-size:40px;border-color:#FFD700">?</div>' +
+        '<div class="result-name" style="color:#FFD700">愚者 · 变数</div>' +
+      '</div>' +
+      '<div class="special-radar-placeholder">✦ ✦ ✦</div>' +
+      '<div class="result-advice">你抽到了塔罗牌中的「愚者」——今日的你超越了一切数据和命理，没有固定的最佳队友，也没有注定的胜负。建议：<b>想玩什么玩什么，想跟谁玩跟谁玩</b>，你就是今天的变数。当然，也可能是今天最大的不稳定因素。</div>' +
+      '<div class="result-actions"><button class="redraw-btn" id="redrawBtn">再抽一次</button></div>' +
+    '</div>';
+  document.getElementById('redrawBtn').addEventListener('click', redraw);
+  el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ===== 再抽一次（只重抽队友，运势不变） ===== */
+function redraw(){
+  drawn = false;
+  var el = document.getElementById('cardResult');
+  el.className = 'card-result';
+  el.innerHTML = '';
+  if(radarChart){ radarChart.dispose(); radarChart = null; }
+
+  var deck = buildDeck();
+  renderFan(deck);
+  var stage = document.getElementById('cardsStage');
+  stage.classList.add('show');
+  stage.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ===== 主流程 ===== */
+function init(){
+  // 填充星座下拉
+  var sel = document.getElementById('zodiacSelect');
+  ZODIACS.forEach(function(z){
+    var opt = document.createElement('option');
+    opt.value = z.id;
+    opt.textContent = z.name + ' ('+z.dates+')';
+    sel.appendChild(opt);
+  });
+
+  var startBtn = document.getElementById('fortuneStart');
+  sel.addEventListener('change', function(){
+    startBtn.disabled = !sel.value;
+  });
+
+  startBtn.addEventListener('click', function(){
+    var z = null;
+    for(var i=0;i<ZODIACS.length;i++) if(ZODIACS[i].id===sel.value) z = ZODIACS[i];
+    if(!z) return;
+    currentZodiac = z;
+
+    // 锁定输入
+    sel.disabled = true;
+    startBtn.disabled = true;
+
+    // 洗牌动画
+    var shuffleEl = document.getElementById('shuffleStage');
+    shuffleEl.classList.add('show');
+
+    // 重新触发动画
+    var flyCards = shuffleEl.querySelectorAll('.fly1,.fly2');
+    flyCards.forEach(function(c){
+      c.style.animation = 'none';
+      void c.offsetWidth;
+      c.style.animation = '';
+    });
+
+    setTimeout(function(){
+      shuffleEl.classList.remove('show');
+      // 生成并显示运势
+      currentFortune = generateFortune(z);
+      renderFortune(currentFortune);
+
+      // 扇形牌
+      var deck = buildDeck();
+      renderFan(deck);
+      var stage = document.getElementById('cardsStage');
+      stage.classList.add('show');
+
+      // 滚动到运势
+      document.getElementById('fortuneResult').scrollIntoView({behavior:'smooth', block:'start'});
+    }, 2300);
+  });
+}
+
+init();
+})();
 })();
 </script>
 
